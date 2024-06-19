@@ -64,9 +64,9 @@ function calculateCost() {
 
     // Apply weapon class restrictions based on total cost
     let isValid = true;
-    if (totalCpCost > 9 && totalCpCost <= 20 && weaponClass === 1) {
+    if (totalCpCost > 9 && weaponClass < 2) {
         isValid = false;
-    } else if (totalCpCost > 19 && totalCpCost <= 30 && weaponClass < 3) {
+    } else if (totalCpCost > 19 && weaponClass < 3) {
         isValid = false;
     } else if (totalCpCost > 29 && weaponClass < 4) {
         isValid = false;
@@ -81,12 +81,12 @@ function calculateCost() {
     // Apply weapon class restrictions based on total cost
     if (totalCpCost > 32) {
         invalidReason = "Total CP cost exceeds maximum allowed (32 CP).";
-    } else if (totalCpCost > 24 && weaponClass < 4) {
-        invalidReason = "Ship costs more than 24 CP but does not have at least B class weapon.";
-    } else if (totalCpCost > 20 && weaponClass < 3) {
-        invalidReason = "Ship costs more than 20 CP but does not have at least C class weapon.";
-    } else if (totalCpCost > 10 && totalCpCost <= 20 && weaponClass === 1) {
-        invalidReason = "Ship costs more than 10 CP but does not have at least D class weapon.";
+    } else if (totalCpCost > 29 && weaponClass < 4) {
+        invalidReason = "Ship costs more than 29 CP but does not have at least B class weapon.";
+    } else if (totalCpCost > 19 && weaponClass < 3) {
+        invalidReason = "Ship costs more than 19 CP but does not have at least C class weapon.";
+    } else if (totalCpCost > 9 && weaponClass < 2) {
+        invalidReason = "Ship costs more than 9 CP but does not have at least D class weapon.";
     }
 
     // Check if any special abilities are selected but total CP cost is invalid
