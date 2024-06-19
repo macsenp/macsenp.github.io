@@ -33,7 +33,15 @@ function calculateCost() {
         });
     }
     
-    let totalCpCost = weaponClass + attackStrength + defenseStrength + hullSize + specialAbilityCost;
+    let totalCpCost = 0;
+
+    totalCpCost = weaponClass + attackStrength + defenseStrength + hullSize + specialAbilityCost;
+
+    // Check if design weakness was chosen and if the rest of ship cost is 17 or higher
+    const weaknessChecked = document.querySelectorAll('#weakness:checked').length;
+    if (totalCpCost >= 16 && weaknessChecked > 0) {
+        totalCpCost -= 1
+    }
     
     let shipSize;
     if (totalCpCost <= 6) {
@@ -56,11 +64,11 @@ function calculateCost() {
 
     // Apply weapon class restrictions based on total cost
     let isValid = true;
-    if (totalCpCost > 10 && totalCpCost <= 20 && weaponClass === 1) {
+    if (totalCpCost > 9 && totalCpCost <= 20 && weaponClass === 1) {
         isValid = false;
-    } else if (totalCpCost > 20 && totalCpCost <= 30 && weaponClass < 3) {
+    } else if (totalCpCost > 19 && totalCpCost <= 30 && weaponClass < 3) {
         isValid = false;
-    } else if (totalCpCost > 30 && weaponClass < 4) {
+    } else if (totalCpCost > 29 && weaponClass < 4) {
         isValid = false;
     }
 
@@ -83,7 +91,7 @@ function calculateCost() {
 
     // Check if any special abilities are selected but total CP cost is invalid
     if (specialAbilityCost <= 0 && totalCpCost > 32) {
-        invalidReason = "Ship is invalid due to excessive cost and lack of special abilities.";
+        invalidReason = "Ship is invalid due to excessive cost.";
     }
 
     document.getElementById('totalCpCost').textContent = totalCpCost;
